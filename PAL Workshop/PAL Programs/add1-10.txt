@@ -1,0 +1,21 @@
+; add numbers 1 to 10
+; R0: output
+; R1: next value to add to total
+; R7: last value to add to total
+; all white space is space character
+
+MOVE 1, R0  ; final output
+MOVE 2, R1  ; next value to add
+MOVE 12, R7 ; recall base 8 unsigned integers
+
+loop:
+ADD R0, R1, R0
+INC R1
+BGT R7, R2 loop
+
+ADD R0, R1, R0 ; loop broken when R2 >= R7, add final #
+
+end:
+BR finish
+
+

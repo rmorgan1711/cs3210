@@ -1,0 +1,29 @@
+Jon Bowen
+CS 3210 HW 01
+
+HW 1 Project Schedule
+Deadline	Task
+1/24/2018	- Write three sample programs in PAL
+			- Complete project schedule
+
+1/27/2018	- Complete reading of Chapter 3 for notation on
+			defining syntax
+
+1/28/2018	- Write syntax rules for PAL in ch. 3 notation
+
+1/29/2018	- Complete reading of Ch. 4 for lexical and syntax
+			analysis
+
+2/1/2018	- Complete design of preprocessor program 
+			including output
+
+2/3/2018	- successfully read input file and output formatted
+			log file
+			- clean source code of comments in output
+
+2/4/2018	- add error checking
+
+2/10/2018	- testing, refactoring, cleaning code
+
+2/13/2018	- complete cover memo and hand in assignment
+

@@ -1,0 +1,14 @@
+; calculate the area of a circle to the nearest integer
+; R0: output
+; R1: radious of circle to nearest integer
+; R7: 3.14159 x 10^5 = 314159 = 1145457_base8
+
+MOVE 1145457, R0 ; move approx PI to R7
+MOVE 3, R1 ; move radious into R1
+
+MUL R1, R1, R1 ; square of radious -> R1
+MUL R7, R1, R0 ; 10^5 * PI * r^2 -> R0
+DIV R0, 303240, R0 ; R0 / (10^5)
+
+end:
+BR end
