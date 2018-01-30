@@ -1,0 +1,27 @@
+Jon Bowen
+CS 3210 HW 1.1
+PAL Parser Syntax Rules
+
+<OneOp> -> INC | DEC
+<threeOp> -> ADD | SUB | MUL | DIV
+<testAndBranch> -> BEQ | BGT
+<branch> -> BR
+
+<instr1> -> <OneOp> <part> <endl>
+<instrCopy> -> COPY <part> , <part> <endl>
+<instrMove> -> MOVE <ws> <num> <ws> , <part> <endl>
+<instr3> -> <threeOp> <part> , <part> , <part> <endl>
+<instrTestBr> -> <testAndBranch> <part> , <part> , <ws> <addr> <ws> <endl>
+<instrBr> -> <branch> <ws> <addr> <ws> <endl>
+<end> -> END <ws> <endl>
+
+<reg> -> R0 | R1 | R2 | R3 | R4 | R5 | R6 | R7
+
+<part> -> <ws> <reg> <ws>
+
+<num> -> any unsigned integer in base 8
+
+<addr> -> a-z and A-Z, 5 or less characters
+
+<endl> -> '\r\n' | '\n'
+<ws> -> zero or more '' (space) characters
