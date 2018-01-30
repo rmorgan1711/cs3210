@@ -8,9 +8,36 @@ In Class Assignment
 	2 - Scala
 	3 - MATLAB
 
+
 2)
-	1
+  1:
+	List = lists:seq(1,99).
+	io:fwrite("Sum is ~w \n", [lists:sum(List)]).
+
 	
+  2:
+	val list = List.range(1,100)
+	val sum : Int = list.foldLeft(0)(_ + _)
+	println("Sum is " + sum)
+
 	
-	3
+  3:
 	sprintf("The sum is %d", sum(1:99))
+
+3)
+  1:
+	if
+		Sum < 42
+			io:fwrite("Sum is less than 42")
+	end.
+
+	
+  2:
+	if (sum < 42)
+		println("Sum is less than 42")
+
+	
+  3:
+	if sum < 42
+		sprintf("Sum is less than 42")
+	end
