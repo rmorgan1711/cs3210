@@ -1,0 +1,301 @@
+Jon Bowen
+CS3210
+In Class Project 1/30/2018
+
+************************
+**** Top Test Loops ****
+************************
+
+*** Top Test Loop 1 ***
+//--- Pseudo code (High Level Language)
+int i = 0;
+int sum = 0;
+while (i < 5){
+	sum = sum + i;
+	i = i + 1;
+}
+
+//--------------------------------
+
+;--- PAL
+; R0: sum
+; R1: loop counter
+; R7: test
+MOVE 0, R0
+MOVE 0, R1
+MOVE 5, R7
+
+test:
+BGT R7, R1, itr
+BR fin
+
+itr:
+ADD R0, R1, R0
+INC R1
+BR test
+
+fin:
+END
+
+***************************************
+*** Top Test Loop 2 ***
+//--- Pseudo code (High Level Language)
+int i = 0;
+int sum = 0;
+while (i <= 3){
+	sum = sum + i;
+	i = i + 1;
+}
+
+//--------------------------------
+
+;--- PAL
+; R0: sum
+; R1: loop counter
+; R7: test
+MOVE 0, R0
+MOVE 0, R1
+MOVE 3, R7
+
+test:
+BGT R7, R1, itr
+BEQ R7, R1, itr
+BR fin
+
+itr:
+ADD R0, R1, R0
+INC R1
+BR test
+
+fin:
+END
+
+
+****************************
+**** If-Else Statements ****
+****************************
+
+*** If-Else 1 ***
+//--- Pseudo code (High Level Language)
+int i = 2;
+int sum = 3;
+if (i < 4){
+	sum = 0;
+}
+
+;--- PAL
+; R0: sum
+; R1: i (variable to test)
+; R7: test
+MOVE 3, R0
+MOVE 2, R1
+MOVE 4, R7
+
+BGT R1, R7, end
+BEQ R1, R7, end
+MOVE 0, R0
+
+end:
+END
+
+***************************************
+*** If-Else 2 ***
+//--- Pseudo code (High Level Language)
+int i = 2;
+int sum;
+if (i <= 4){
+	sum = 0;
+} else{
+	sum = 1
+}
+
+;--- PAL
+; R0: sum
+; R1: i (variable to test)
+; R7: test
+MOVE 2, R1
+MOVE 4, R7
+
+BGT R1, R7, else
+MOVE 0, R0
+BR end
+
+else:
+MOVE 1, R0
+
+end:
+END
+
+
+for( i = 0; i < n; i++ ):
+	loop:
+	BGT R1, R0, body
+	BR skip
+	body:
+	; LOOP BODY
+	INC R0
+	BR loop
+	skip:
+	; CONTINUE
+
+if( statement has label )
+	lab1 = label
+	if (next instruction is BGT)
+		n = 1st branch operand
+		i = 2nd branch operand
+		lab2 = 3rd branch operand
+		if (“INC i” followed by “BR lab1" is the first branching after lab2)
+			lab3 = next label below "BR lab1" statement
+			if (next instr after BGT is "BR lab3")
+				return true
+
+for( i = 0; i <= n; i++ ):
+	loop:
+	BGT R1, R0, body
+	BEQ R1, R0, body
+	BR skip
+	body:
+	; LOOP BODY
+	INC R0
+	BR loop
+	skip:
+	; CONTINUE
+
+if( statement has label )
+	lab1 = label
+	if (next instruction is BGT)
+		n = 1st branch operand
+		i = 2nd branch operand
+		lab2 = 3rd branch operand
+		if (“INC i” followed by “BR lab1" is the first branching after lab2)
+			lab3 = next label below "BR lab1" statement
+			if (next instr after BGT is "BEQ n, i lab2")
+				if (next instr after "BEQ n, i, lab2" is "BR lab3")
+					return true
+
+if (R0 < R1):
+	BGT R1, R0, doif
+	BR skip
+	doif:
+	; IF BLOCK
+	skip:
+	; CONTINUE
+
+if (next instr is BGT)
+	n = 1st branch operand
+	i = 2nd branch operand
+	lab1 = 3rd branch operand
+	if (BR follows BGT)
+		lab 2 = BR operand
+		if (1st label after BR == lab1 && 2nd label after BR == lab2)
+			return true
+
+if (R0 <= R1)
+	BGT R0, R1, addr
+	; IF BLOCK
+	addr:
+	; CONTINUE
+
+if (next instr is BGT)
+	i = 1st branch operand
+	n = 2nd branch operand
+	lab1 = 3rd branch operand
+	if (1st label after BGT == lab1)
+		return true
+
+if (R0 == R1)
+	BEQ R0, R1, doif
+	BR skip
+	doif:
+	; IF BLOCK
+	skip:
+	; CONTINUE
+
+if (next instr is BEQ)
+	i = 1st branch operand
+	n = 2nd branch operand
+	lab1 = 3rd branch operand
+	if (next instr after BEQ is BR)
+		lab2 = BR operand
+		if (1st label after BR == lab1 && 2nd label after BR == lab2)
+			return true
+
+if (R0 != R1)
+	BEQ R0, R1, skip
+	; IF BLOCK
+	skip:
+	; CONTINUE
+
+if (next instr == BEQ)
+	i = 1st branch operand
+	n = 2nd branch operand
+	lab1 = 3rd branch operand
+	if (1st label after BEQ == lab1)
+		return true
+
+***
+if (R0 < R1) else:
+	BGT R1, R0, doif
+	; ELSE BODY
+	BR skip
+	doif:
+	; IF BLOCK
+	skip:
+	; CONTINUE
+
+if (next instr == BGT)
+	i = 1st branch operand
+	n = 2nd branch operand
+	lab1 = 3rd branch operand
+	if (if next branch is BR && next label == lab1)
+		lab2 = BR operand
+		if( next label == lab 2)
+			return true
+	
+if (R0 <= R1) else:
+	BGT R0, R1, else
+	; IF BLOCK
+	BR skip
+	else:
+	; ELSE BODY
+	skip:
+	; CONTINUE
+
+if (next instr == BGT)
+	n = 1st branch operand
+	i = 2nd branch operand
+	lab1 = 3rd branch operand
+	if (next branch == BR and next label == lab1)
+		if (next label == lab2)
+			return true
+
+if (R0 == R1) else:
+	BEQ R0, R1, doif
+	; ELSE BODY
+	BR skip
+	doif:
+	; IF BLOCK
+	skip:
+	; CONTINUE
+
+if (R0 != R1) else:
+	BEQ R0, R1, else
+	; IF BLOCK
+	BR skip
+	else:
+	; ELSE BODY
+	skip:
+	; CONTINUE
+
+
+
+
+
+
+
+
+
+
+
+
+
