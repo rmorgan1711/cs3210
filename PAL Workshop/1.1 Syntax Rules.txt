@@ -2,26 +2,39 @@ Jon Bowen
 CS 3210 HW 1.1
 PAL Parser Syntax Rules
 
+<program> -> <start> <body> <end>
+<body> -> <block> | <body> <block>
+<block> -> <codeSep> <code> <codeSep>
+<code> -> <line> | <code> <line>
+<line> -> <ws> <comment> <endl> | <ws> <instr> <comment> <endl> 
+
+<instr> -> <label> | <instrOp1> | <instrCopy> | <instrMove> 
+			| <instrOp3> | <instrTestBr> | <instrBr>
+
+<label> -> <addr> :
+<instrOp1> -> <OneOp> <regPart>
+<instrCopy> -> COPY <regPart> , <regPart>
+<instrMove> -> MOVE <wsDef> <num> , <regPart>
+<instrOp3> -> <threeOp> <regPart> , <regPart> , <regPart>
+<instrTestBr> -> <testAndBranch> <regPart> , <regPart> , <wsDef> <addr>
+<instrBr> -> <branch> <wsDef> <addr>
+
 <OneOp> -> INC | DEC
 <threeOp> -> ADD | SUB | MUL | DIV
 <testAndBranch> -> BEQ | BGT
 <branch> -> BR
+<start> -> SRT <endl>
+<end> -> END | END <endl>
 
-<instr1> -> <OneOp> <part> <endl>
-<instrCopy> -> COPY <part> , <part> <endl>
-<instrMove> -> MOVE <ws> <num> <ws> , <part> <endl>
-<instr3> -> <threeOp> <part> , <part> , <part> <endl>
-<instrTestBr> -> <testAndBranch> <part> , <part> , <ws> <addr> <ws> <endl>
-<instrBr> -> <branch> <ws> <addr> <ws> <endl>
-<end> -> END <ws> <endl>
+<regPart> -> <wsDef> <reg>
 
 <reg> -> R0 | R1 | R2 | R3 | R4 | R5 | R6 | R7
-
-<part> -> <ws> <reg> <ws>
-
 <num> -> any unsigned integer in base 8
-
 <addr> -> a-z and A-Z, 5 or less characters
+<comment> -> zero or one of: ; <ws> <printChars> 
+<printChars> -> zero or more of a-z, A-Z, 0-9, and ' ' (space)
 
-<endl> -> '\r\n' | '\n'
-<ws> -> zero or more '' (space) characters
+<ws> -> zero or more ' ' (space) characters
+<wsDef> -> one or more ' ' (space) characters
+<endl> -> <ws> '\r\n' | <ws> '\n'
+<codeSep> -> zero or more <endl>
