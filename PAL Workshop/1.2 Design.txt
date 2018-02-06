@@ -1,0 +1,25 @@
+Jon Bowen
+CS 3210 HW 1.2
+Design
+
+Inputs
+the name of the file to process as a string
+
+Outputs
+log file written to disk
+
+Pseudocode
+string filename = command line argument // extensionless
+string[] lines = read in all lines
+List<string> outLines = new List<string>()
+
+
+
+int lineNum = 1
+foreach (line in lines)
+	if (line only white space || first non-white space == ";")
+		skip line
+
+	outLines.add(line)
+
+
