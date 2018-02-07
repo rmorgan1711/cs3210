@@ -1,16 +1,25 @@
 Compilation Log File
 Command argument: testProg
 Log file name: testProg.log
-Begin time: 05/02/18 22:23:14
+Begin time: 06/02/18 22:03:52
 
 
-1.	MOVE 1, R0
+** error: Program must begin with "SRT"
 2.	MOVE 2, R1
 3.	MOVE 12, R7
-4.	loooop:
+4.	lo0p     :
+** error: Lables must use only a-z and A-Z
 5.	ADD R0, R1, R0
 6.	INC R1
 7.	BGT R7, R2 loop
 8.	ADD R0, R1, R0
 9.	end:
 10.	BR finish
+
+Summary --------------
+
+Total errors = 2
+
+	1 Invalid label
+	1 Invalid program start
+Processing complete - PAL program is not valid
