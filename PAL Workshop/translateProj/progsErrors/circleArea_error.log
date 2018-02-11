@@ -1,0 +1,32 @@
+Compilation Log File
+Command argument: progsErrors\circleArea_error
+Log file name: progsErrors\circleArea_error.log
+Begin time: 11/02/18 13:27:36
+
+
+** error: Program must begin with SRT
+1.	DEF PI, 1000
+2.	DEF powT, 1001
+3.	DEF bad, 1008
+** Error: 2nd operand must be base 8 immediate value
+4.	DEF tooMany, 1002
+** error: Labels must be 5 letters or less
+5.	MOVE 1145457, PI
+6.	MOVE 303240, powT
+7.	MOVE 3, R1
+8.	MUL R1, R1, R1
+9.	MUL R7, R1, R0
+10.	DIV R0, powT, R0
+11.	BR noUse
+12.	END
+** Error: Labels branched to but not defined:
+	[noUse]
+
+Summary --------------
+
+Total errors = 4
+
+	1 Operand error(s)
+	2 Label error(s)
+	1 Program start invalid
+Processing complete - PAL program is NOT valid

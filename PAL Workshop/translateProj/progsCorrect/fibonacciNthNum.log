@@ -1,0 +1,32 @@
+Compilation Log File
+Command argument: progsCorrect\fibonacciNthNum
+Log file name: progsCorrect\fibonacciNthNum.log
+Begin time: 11/02/18 13:23:20
+
+
+1.	SRT
+2.	MOVE 5, R7
+3.	MOVE 0, R1
+4.	MOVE 1, R2
+5.	BEQ R7, R1, zTerm
+6.	BEQ R7, R2, fTerm
+7.	MOVE 1, R6
+8.	loop:
+9.	INC R6
+10.	ADD R1, R2, R0
+11.	BEQ R6, R7, end
+12.	COPY R2, R1
+13.	COPY R0, R2
+14.	BR loop
+15.	zTerm:   MOVE 0, R0
+16.	BR end
+17.	fTerm:  MOVE 1, R0
+18.	BR end
+19.	end:
+20.	END
+
+Summary --------------
+
+Total errors = 0
+
+Processing complete - PAL program is valid

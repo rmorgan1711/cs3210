@@ -1,0 +1,41 @@
+Compilation Log File
+Command argument: progsErrors\fibonacciNthNum_error
+Log file name: progsErrors\fibonacciNthNum_error.log
+Begin time: 11/02/18 13:24:16
+
+
+1.	SRT
+2.	MOVE 5, R7
+3.	MOVE 0, R1
+4.	MOVE 1, R2
+5.	DEF temp, 1000
+** Error: Definitions must immediately follow SRT
+6.	BEQ R7, R1, zTerm
+7.	BEQ R7, R2, fTerm
+8.	MOVE 1, R6
+9.	lo0p:
+** error: Labels must use only a-z and A-Z
+10.	INC R6
+11.	ADD R1, R2, R0
+12.	BEQ R6, R7, end
+13.	MOVE R2, R1
+** Error: 1st operand must be base 8 immediate value
+14.	COPY R0, R2
+15.	BR loop
+16.	zTerm:   MOVE 0, R0
+17.	BR end
+18.	fTerm:  MOVE 1, R0
+19.	BR end
+20.	end:
+21.	END
+** Error: Labels branched to but not defined:
+	[loop]
+
+Summary --------------
+
+Total errors = 4
+
+	1 Operand error(s)
+	2 Label error(s)
+	1 Mem address alias undefined error(s)
+Processing complete - PAL program is NOT valid

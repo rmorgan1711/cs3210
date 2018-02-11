@@ -1,0 +1,23 @@
+; add numbers 1 to 10
+; R0: output
+; R1: next value to add to total
+; R7: last value to add to total
+; all white space is space character
+
+SRT
+DEF n, 1000	
+MOVE 12, m 		; m NOT DEFINED
+MOVE 1, R0  
+MOVE 2, R1  
+
+loop:
+ADDD R0, R1, R0	; BAD OPCODE
+INC R1
+BGT n, R2, loop
+
+ADD R0, R1, R0 
+
+end:			; LABEL NEVER BRANCHED TO
+END
+
+

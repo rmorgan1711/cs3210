@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
  */
 public class Main {
 
-    //
+    public static String EXT = ".pal";
     public static Set<String> Registers = MakeRegisterSet();
     public static Set<String> RegOperands = Registers.stream().map(r -> r + ",").collect(Collectors.toSet());
     public static Map<String, OpGroup> OpTypeMap = MakeOpTypeMap();
@@ -22,10 +23,12 @@ public class Main {
 
     public static void main(String[] args){
 
-        System.out.println("The arg is " + args[0]);
+        System.out.println("The searching for " + args[0] + EXT);
+        System.out.println("at location");
+        System.out.println(Paths.get("").toAbsolutePath().toString());
 
         String fileName = args[0];
-        List<String> lines = FileOps.ReadFile(fileName + ".txt");
+        List<String> lines = FileOps.ReadFile(fileName + EXT);
         lines = RemoveCommentsAndBlanks(lines);
 
         List<String> outLines = FileOps.MakeHeaderLines(fileName);
@@ -41,7 +44,7 @@ public class Main {
         String[] startLine = lines.get(0).split(" ");
         if (!startLine[0].equals("SRT")){
             outLines.add("** error: Program must begin with SRT");
-            ErrNumMap.put(ParseError.WhiteSpaceError, ErrNumMap.get(ParseError.WhiteSpaceError) + 1);
+            ErrNumMap.put(ParseError.StartError, ErrNumMap.get(ParseError.StartError) + 1);
         }else {
             outLines.add(lineNum + ".\t" + lines.get(0));
             lineNum++;
@@ -53,7 +56,6 @@ public class Main {
         lineNum = lineNum + (linesBefore - lines.size());
 
         String line;
-
         boolean endFound = false;
         for (int i = 0; i < lines.size(); i++){
             line = lines.get(i);
@@ -61,7 +63,7 @@ public class Main {
 
             if (line.contains("\t")){
                 outLines.add("** Error: Tab is used instead of space");
-                ErrNumMap.put(ParseError.LabelError, ErrNumMap.get(ParseError.LabelError) + 1);
+                ErrNumMap.put(ParseError.WhiteSpaceError, ErrNumMap.get(ParseError.WhiteSpaceError) + 1);
                 continue;
             }
 
@@ -77,7 +79,7 @@ public class Main {
                 continue;
             }
 
-            line = line.substring(line.lastIndexOf(':') + 1); // strip any label
+            line = line.substring(line.lastIndexOf(':') + 1).trim(); // strip any label
             if (line.isEmpty())
                 continue;
 
@@ -98,7 +100,7 @@ public class Main {
         }
 
         if (!endFound){
-            outLines.add("** Error: Legal END opcode not found");
+            outLines.add("** Error: END opcode not found alone on a line");
             ErrNumMap.put(ParseError.EndError, ErrNumMap.get(ParseError.EndError) + 1);
         }
 
@@ -131,10 +133,10 @@ public class Main {
 
     public static List<String> ConsumeDefinitionLines(List<String> lines, int lineNum){
         List<String> outLines = new ArrayList<>();
-
-        String line = lines.size() > 0 ? lines.get(0) : null;
+        String line;
         while (lines.size() > 0 && lines.get(0).split(" ")[0].equals("DEF")){
-            outLines.add(lineNum + ".\t" + lines.get(0));
+            line = lines.get(0);
+            outLines.add(lineNum + ".\t" + line);
             lineNum++;
             lines.remove(0);
 
@@ -292,11 +294,11 @@ public class Main {
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else if (!RegOperands.contains(tokens[1]) && !MemLabOperands.containsKey(tokens[1])){
-                errorMsg = "** Error: Operands must be registers";
+                errorMsg = "** Error: Operands must be registers or memory labels";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else if (!Registers.contains(tokens[2]) && !MemLabels.containsKey(tokens[2])){
-                errorMsg = "** Error: Operands must be registers";
+                errorMsg = "** Error: Operands must be registers or memory labels";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
         }
@@ -310,7 +312,7 @@ public class Main {
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else if (!Registers.contains(tokens[2]) && !MemLabels.containsKey(tokens[2])){
-                errorMsg = "** Error: 2nd operand must be a register";
+                errorMsg = "** Error: 2nd operand must be a register or memory label";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
         }

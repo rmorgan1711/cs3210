@@ -1,0 +1,31 @@
+Compilation Log File
+Command argument: progsErrors\add1-10_error
+Log file name: progsErrors\add1-10_error.log
+Begin time: 11/02/18 13:23:57
+
+
+1.	SRT
+2.	DEF n, 1000
+3.	MOVE 12, m
+** Error: 2nd operand must be a register or memory label
+4.	MOVE 1, R0
+5.	MOVE 2, R1
+6.	loop:
+7.	ADDD R0, R1, R0
+** Error: The opcode is not recognized
+8.	INC R1
+9.	BGT n, R2, loop
+10.	ADD R0, R1, R0
+11.	end:
+12.	END
+** Error: Labels defined but not branched to:
+	[end]
+
+Summary --------------
+
+Total errors = 3
+
+	1 Operand error(s)
+	1 Label error(s)
+	1 Opcode invalid error(s)
+Processing complete - PAL program is NOT valid

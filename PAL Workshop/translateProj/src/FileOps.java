@@ -12,6 +12,11 @@ import java.util.Map;
  */
 public class FileOps {
 
+    /**
+     * Read a PAL file and return the lines as a list of strings
+     * @param fileName A file name without an extension (e.g. no ".pal")
+     * @return A list of the lines in the file
+     */
     public static List<String> ReadFile(String fileName){
         List<String> lines = new ArrayList<>();
         try{
@@ -28,6 +33,11 @@ public class FileOps {
         return lines;
     }
 
+    /**
+     * Write lines to a file
+     * @param fileName The name of the file to create
+     * @param lines The lines to write to the file
+     */
     public static void WriteLogFile(String fileName, List<String> lines){
 
         try{
@@ -42,6 +52,11 @@ public class FileOps {
 
     }
 
+    /**
+     * Return the header lines for the log file
+     * @param fileName The name of the log file
+     * @return The list of header lines
+     */
     public static List<String> MakeHeaderLines(String fileName){
         List<String> header = new ArrayList<>();
         header.add("Compilation Log File");
@@ -54,6 +69,12 @@ public class FileOps {
         return header;
     }
 
+    /**
+     * Return the footer lines for the log file
+     * @param errorCount The count of each error type
+     * @param errorDescription The description of each error type
+     * @return The list of footer lines
+     */
     public static List<String> MakeFooterLines(Map<ParseError, Integer> errorCount,
                                                Map<ParseError, String> errorDescription){
         List<String> footer = new ArrayList<>();
