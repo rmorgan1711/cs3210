@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
  */
 public class Main {
 
+    //
     public static Set<String> Registers = MakeRegisterSet();
     public static Set<String> RegOperands = Registers.stream().map(r -> r + ",").collect(Collectors.toSet());
     public static Map<String, OpGroup> OpTypeMap = MakeOpTypeMap();
@@ -24,15 +25,15 @@ public class Main {
         System.out.println("The arg is " + args[0]);
 
         String fileName = args[0];
-        List<String> lines = ReadFile(fileName + ".txt");
+        List<String> lines = FileOps.ReadFile(fileName + ".txt");
         lines = RemoveCommentsAndBlanks(lines);
 
-        List<String> outLines = MakeHeaderLines(fileName);
+        List<String> outLines = FileOps.MakeHeaderLines(fileName);
         if (lines.size() < 1){
             outLines.add("** Error: File contains no code");
             ErrNumMap.put(ParseError.NoCodeFound, ErrNumMap.get(ParseError.NoCodeFound) + 1);
-            outLines.addAll(MakeFooterLines(ErrNumMap));
-            WriteLogFile(fileName + ".log", outLines);
+            outLines.addAll(FileOps.MakeFooterLines(ErrNumMap, ErrDesc));
+            FileOps.WriteLogFile(fileName + ".log", outLines);
             return;
         }
 
@@ -102,106 +103,9 @@ public class Main {
         }
 
         outLines.addAll(CheckLabelBranchAndDef());
-
-        outLines.addAll(MakeFooterLines(ErrNumMap));
-        WriteLogFile(fileName + ".log", outLines);
+        outLines.addAll(FileOps.MakeFooterLines(ErrNumMap, ErrDesc));
+        FileOps.WriteLogFile(fileName + ".log", outLines);
     }
-
-    //***************************************
-    // File operations
-    //***************************************
-    public static List<String> ReadFile(String fileName){
-        List<String> lines = new ArrayList<>();
-        try{
-
-            FileReader fileReader = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(fileReader);
-            String line;
-            while ((line = br.readLine()) != null)
-                lines.add(line);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-        }
-
-        return lines;
-    }
-
-    public static void WriteLogFile(String fileName, List<String> lines){
-
-        try{
-            FileWriter fw = new FileWriter(fileName);
-            BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < lines.size(); i++)
-                bw.write(lines.get(i) + "\r\n");
-            bw.close();
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    public static List<String> MakeHeaderLines(String fileName){
-        List<String> header = new ArrayList<>();
-        header.add("Compilation Log File");
-        header.add("Command argument: " + fileName);
-        header.add("Log file name: " + fileName + ".log");
-        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-        header.add("Begin time: " + df.format(new Date()));
-        header.add("\r\n");
-
-        return header;
-    }
-
-    public static List<String> MakeFooterLines(Map<ParseError, Integer> errorCount){
-        List<String> footer = new ArrayList<>();
-
-        footer.add("\r\nSummary --------------\r\n");
-        int totErrors = errorCount.values().stream().mapToInt(Number::intValue).sum();
-        footer.add("Total errors = " + totErrors + "\r\n");
-
-        for (ParseError key : errorCount.keySet()){
-            if (errorCount.get(key) > 0){
-                footer.add("\t" + errorCount.get(key) + " " + ErrDesc.get(key));
-            }
-        }
-
-        String last = "Processing complete - ";
-        if (totErrors > 0)
-            last += "PAL program is NOT valid";
-        else
-            last += "PAL program is valid";
-        footer.add(last);
-
-        return footer;
-    }
-
-
-    //***************************************
-    // Enumerations
-    //***************************************
-    public enum ParseError{
-        StartError,
-        EndError,
-        LabelError,
-        BadOpCode,
-        BadOperand,
-        WhiteSpaceError,
-        DefineError,
-        NoCodeFound,
-    }
-
-    public enum OpGroup {
-        Start,
-        End,
-        OneOp,
-        ThreeOp,
-        TestAndBranch,
-        Branch,
-        Copy,
-        Move,
-        Define
-    }
-
 
     //***************************************
     // Translation operations

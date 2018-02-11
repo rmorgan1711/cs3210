@@ -9,6 +9,7 @@ SRT
 DEF jon, 234
 MOVE 17, R4  ; final output
 MOVE 2, jon  ; next value to add
+DEF bob, 342
 MOVE 12, R7 ; recall base 8 unsigned integers
 COPY R1, jon
 
@@ -17,8 +18,10 @@ test:
 loop     : 
 ADD jon, R1, R0
 INC R1
+INC R9
 BGT R7, R2, loop
 BR test
+INC bill
 
 ADD R0, R1, R0 ; loop broken when R2 >= R7, add final #
 
