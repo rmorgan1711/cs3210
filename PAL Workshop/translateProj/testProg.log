@@ -1,25 +1,35 @@
 Compilation Log File
 Command argument: testProg
 Log file name: testProg.log
-Begin time: 06/02/18 22:03:52
+Begin time: 10/02/18 17:25:40
 
 
-** error: Program must begin with "SRT"
-2.	MOVE 2, R1
-3.	MOVE 12, R7
-4.	lo0p     :
-** error: Lables must use only a-z and A-Z
-5.	ADD R0, R1, R0
-6.	INC R1
-7.	BGT R7, R2 loop
-8.	ADD R0, R1, R0
-9.	end:
-10.	BR finish
+1.	SRT
+2.	DEF jon, 234
+3.	MOVE 17, R4
+4.	MOVE 2, jon
+5.	MOVE 12, R7
+6.	COPY R1, jon
+7.	test:
+8.	loop     :
+9.	ADD jon, R1, R0
+10.	INC R1
+11.	BGT R7, R2, loop
+12.	BR test
+13.	ADD R0, R1, R0
+14.	test :
+15.	BR penu
+16.	penu:
+17.	BEQ R0, R0, end
+18.	end:
+19.	BR fin
+20.	fin:
+21.	END
+** Error: Label [test] is defined more than once
 
 Summary --------------
 
-Total errors = 2
+Total errors = 1
 
-	1 Invalid label
-	1 Invalid program start
-Processing complete - PAL program is not valid
+	1 Label error(s)
+Processing complete - PAL program is NOT valid

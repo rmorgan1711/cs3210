@@ -4,19 +4,34 @@
 ; R7: last value to add to total
 ; all white space is space character
 
-;SRT
-MOVE 1, R0  ; final output
-MOVE 2, R1  ; next value to add
-MOVE 12, R7 ; recall base 8 unsigned integers
 
-lo0p     : 
-ADD R0, R1, R0
+SRT
+DEF jon, 234
+MOVE 17, R4  ; final output
+MOVE 2, jon  ; next value to add
+MOVE 12, R7 ; recall base 8 unsigned integers
+COPY R1, jon
+
+test:
+
+loop     : 
+ADD jon, R1, R0
 INC R1
-BGT R7, R2 loop
+BGT R7, R2, loop
+BR test
 
 ADD R0, R1, R0 ; loop broken when R2 >= R7, add final #
 
+test :
+
+BR penu
+penu:
+
+BEQ R0, R0, end
 end:
-BR finish
+BR fin
+
+fin:
+END
 
 
