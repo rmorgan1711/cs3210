@@ -5,8 +5,8 @@
 ; all white space is space character
 
 SRT
-DEF n, 1000	; mem location 1000
-MOVE 12, n 	;
+DEF n, 1000 ; mem location 1000
+MOVE 12, n  ;
 MOVE 1, R0  ; final output
 MOVE 2, R1  ; next value to add
 

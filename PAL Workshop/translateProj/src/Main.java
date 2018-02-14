@@ -20,6 +20,7 @@ public class Main {
     public static Map<String, String> MemLabOperands = new HashMap<>();
     public static Map<String, Integer> LabelsDefined = new HashMap<>();
     public static Set<String> LabelsBranchedTo = new HashSet<>();
+    public static int CodeLine = 1;
 
     public static void main(String[] args){
 
@@ -41,34 +42,38 @@ public class Main {
             return;
         }
 
-        int lineNum = 1;
         lines.set(0, RemoveComment(lines.get(0)));
         String[] startLine = lines.get(0).split(" ");
         if (!startLine[0].equals("SRT")){
             outLines.add("** error: Program must begin with SRT");
             ErrNumMap.put(ParseError.StartError, ErrNumMap.get(ParseError.StartError) + 1);
         }else {
-            outLines.add(lineNum + ".\t" + lines.get(0));
-            lineNum++;
+            outLines.add(CodeLine + ".\t" + lines.get(0));
+            CodeLine++;
             lines.remove(0);
         }
 
         lines = ConsumeToCode(lines);
-        int linesBefore = lines.size();
-        outLines.addAll(ConsumeDefinitionLines(lines, lineNum));
-        lineNum = lineNum + (linesBefore - lines.size());
+        List<String> defLines = ConsumeDefinitionLines(lines, CodeLine);
+        outLines.addAll(defLines);
+        CodeLine = CodeLine + defLines.size();
 
         String line;
         boolean endFound = false;
         for (int i = 0; i < lines.size(); i++){
             line = lines.get(i);
-            outLines.add((lineNum++) + ".\t" + line);
 
             if (line.contains("\t")){
                 outLines.add("** Error: Tab is used instead of space");
                 ErrNumMap.put(ParseError.WhiteSpaceError, ErrNumMap.get(ParseError.WhiteSpaceError) + 1);
                 continue;
             }
+
+            line = RemoveComment(line);
+            if (line.isEmpty())
+                continue;
+
+            outLines.add((CodeLine++) + ".\t" + line);
 
             if (line.equals("END")) {
                 endFound = true;
