@@ -29,7 +29,8 @@ public class Main {
 
         String fileName = args[0];
         List<String> lines = FileOps.ReadFile(fileName + EXT);
-        lines = RemoveCommentsAndBlanks(lines);
+        lines = ConsumeToCode(lines);
+//        lines = RemoveCommentsAndBlanks(lines);
 
         List<String> outLines = FileOps.MakeHeaderLines(fileName);
         if (lines.size() < 1){
@@ -41,6 +42,7 @@ public class Main {
         }
 
         int lineNum = 1;
+        lines.set(0, RemoveComment(lines.get(0)));
         String[] startLine = lines.get(0).split(" ");
         if (!startLine[0].equals("SRT")){
             outLines.add("** error: Program must begin with SRT");
@@ -51,6 +53,7 @@ public class Main {
             lines.remove(0);
         }
 
+        lines = ConsumeToCode(lines);
         int linesBefore = lines.size();
         outLines.addAll(ConsumeDefinitionLines(lines, lineNum));
         lineNum = lineNum + (linesBefore - lines.size());
@@ -112,6 +115,31 @@ public class Main {
     //***************************************
     // Translation operations
     //***************************************
+    public static List<String> ConsumeToCode(List<String> lines){
+
+        for (int i = 0; i < lines.size(); ){
+            String line = lines.get(i);
+
+            if (line.contains(";"))
+                line = line.substring(0, line.indexOf(';'));
+
+            line = line.trim();
+            if (line.length() == 0)
+                lines.remove(0);
+            else
+                break;
+        }
+        return lines;
+    }
+
+    public static String RemoveComment(String line){
+        if (line.contains(";"))
+            line = line.substring(0, line.indexOf(';'));
+
+        line = line.trim();
+        return line;
+    }
+
     public static List<String> RemoveCommentsAndBlanks(List<String> lines){
         List<String> contentLines = new ArrayList<>();
 
@@ -134,6 +162,7 @@ public class Main {
     public static List<String> ConsumeDefinitionLines(List<String> lines, int lineNum){
         List<String> outLines = new ArrayList<>();
         String line;
+        lines.set(0, RemoveComment(lines.get(0)));
         while (lines.size() > 0 && lines.get(0).split(" ")[0].equals("DEF")){
             line = lines.get(0);
             outLines.add(lineNum + ".\t" + line);

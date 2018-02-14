@@ -15,13 +15,13 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-93">
-              <caret line="23" column="42" lean-forward="false" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+            <state relative-caret-position="321">
+              <caret line="164" column="50" lean-forward="false" selection-start-line="164" selection-start-column="50" selection-end-line="164" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#main#0;class#Main#0" expanded="false" />
+                <element signature="method#ConsumeToCode#0;class#Main#0" expanded="false" />
+                <element signature="method#RemoveComment#0;class#Main#0" expanded="false" />
                 <element signature="method#RemoveCommentsAndBlanks#0;class#Main#0" expanded="false" />
-                <element signature="method#ConsumeDefinitionLines#0;class#Main#0" expanded="false" />
                 <element signature="method#CheckLabel#0;class#Main#0" expanded="false" />
                 <element signature="method#CheckLabelFormat#0;class#Main#0" expanded="false" />
                 <element signature="method#ProcessOpCode#0;class#Main#0" expanded="false" />
@@ -110,6 +110,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -126,10 +128,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="RunDashboard">
@@ -156,7 +156,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="testProgs\fibonacciNthNum" />
+      <option name="PROGRAM_PARAMETERS" value="progsCorrect\add1-10" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -274,8 +274,8 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2246604" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2246604" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -284,8 +284,8 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.169279" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43469176" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -302,21 +302,62 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>81</line>
+          <line>84</line>
           <properties />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>31</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="19" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#ConsumeToCode#0;class#Main#0" expanded="false" />
+            <element signature="method#RemoveComment#0;class#Main#0" expanded="false" />
+            <element signature="method#RemoveCommentsAndBlanks#0;class#Main#0" expanded="false" />
+            <element signature="method#CheckLabel#0;class#Main#0" expanded="false" />
+            <element signature="method#CheckLabelFormat#0;class#Main#0" expanded="false" />
+            <element signature="method#ProcessOpCode#0;class#Main#0" expanded="false" />
+            <element signature="method#CheckOperandNum#0;class#Main#0" expanded="false" />
+            <element signature="method#CheckLabelBranchAndDef#0;class#Main#0" expanded="false" />
+            <element signature="method#MakeRegisterSet#0;class#Main#0" expanded="false" />
+            <element signature="method#MakeOpTypeMap#0;class#Main#0" expanded="false" />
+            <element signature="method#MakeErrorCountMap#0;class#Main#0" expanded="false" />
+            <element signature="method#MakeErrorDescriptionMap#0;class#Main#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileOps.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1575">
+          <caret line="75" column="39" lean-forward="false" selection-start-line="75" selection-start-column="39" selection-end-line="75" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#ReadFile#0;class#FileOps#0" expanded="false" />
+            <element signature="method#WriteLogFile#0;class#FileOps#0" expanded="false" />
+            <element signature="method#MakeHeaderLines#0;class#FileOps#0" expanded="false" />
+            <element signature="method#MakeFooterLines#0;class#FileOps#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/function/IntPredicate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -326,9 +367,9 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#main#0;class#Main#0" expanded="false" />
+            <element signature="method#ConsumeToCode#0;class#Main#0" expanded="false" />
+            <element signature="method#RemoveComment#0;class#Main#0" expanded="false" />
             <element signature="method#RemoveCommentsAndBlanks#0;class#Main#0" expanded="false" />
-            <element signature="method#ConsumeDefinitionLines#0;class#Main#0" expanded="false" />
             <element signature="method#CheckLabel#0;class#Main#0" expanded="false" />
             <element signature="method#CheckLabelFormat#0;class#Main#0" expanded="false" />
             <element signature="method#ProcessOpCode#0;class#Main#0" expanded="false" />
@@ -348,9 +389,9 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#main#0;class#Main#0" expanded="false" />
+            <element signature="method#ConsumeToCode#0;class#Main#0" expanded="false" />
+            <element signature="method#RemoveComment#0;class#Main#0" expanded="false" />
             <element signature="method#RemoveCommentsAndBlanks#0;class#Main#0" expanded="false" />
-            <element signature="method#ConsumeDefinitionLines#0;class#Main#0" expanded="false" />
             <element signature="method#CheckLabel#0;class#Main#0" expanded="false" />
             <element signature="method#CheckLabelFormat#0;class#Main#0" expanded="false" />
             <element signature="method#ProcessOpCode#0;class#Main#0" expanded="false" />
@@ -370,9 +411,9 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#main#0;class#Main#0" expanded="false" />
+            <element signature="method#ConsumeToCode#0;class#Main#0" expanded="false" />
+            <element signature="method#RemoveComment#0;class#Main#0" expanded="false" />
             <element signature="method#RemoveCommentsAndBlanks#0;class#Main#0" expanded="false" />
-            <element signature="method#ConsumeDefinitionLines#0;class#Main#0" expanded="false" />
             <element signature="method#CheckLabel#0;class#Main#0" expanded="false" />
             <element signature="method#CheckLabelFormat#0;class#Main#0" expanded="false" />
             <element signature="method#ProcessOpCode#0;class#Main#0" expanded="false" />
@@ -390,7 +431,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="59" column="53" lean-forward="false" selection-start-line="59" selection-start-column="53" selection-end-line="59" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -398,18 +438,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileOperations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="60" column="62" lean-forward="false" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileOperations.java" />
     <entry file="file://$PROJECT_DIR$/src/FileOps.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="819">
@@ -442,13 +474,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-93">
-          <caret line="23" column="42" lean-forward="false" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+        <state relative-caret-position="321">
+          <caret line="164" column="50" lean-forward="false" selection-start-line="164" selection-start-column="50" selection-end-line="164" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#main#0;class#Main#0" expanded="false" />
+            <element signature="method#ConsumeToCode#0;class#Main#0" expanded="false" />
+            <element signature="method#RemoveComment#0;class#Main#0" expanded="false" />
             <element signature="method#RemoveCommentsAndBlanks#0;class#Main#0" expanded="false" />
-            <element signature="method#ConsumeDefinitionLines#0;class#Main#0" expanded="false" />
             <element signature="method#CheckLabel#0;class#Main#0" expanded="false" />
             <element signature="method#CheckLabelFormat#0;class#Main#0" expanded="false" />
             <element signature="method#ProcessOpCode#0;class#Main#0" expanded="false" />

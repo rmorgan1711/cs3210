@@ -1,0 +1,22 @@
+Compilation Log File
+Command argument: progsCorrect\circleArea
+Log file name: progsCorrect\circleArea.log
+Begin time: 11/02/18 13:23:05
+
+
+1.	SRT
+2.	DEF PI, 1000
+3.	DEF powT, 1001
+4.	MOVE 1145457, PI
+5.	MOVE 303240, powT
+6.	MOVE 3, R1
+7.	MUL R1, R1, R1
+8.	MUL R7, R1, R0
+9.	DIV R0, powT, R0
+10.	END
+
+Summary --------------
+
+Total errors = 0
+
+Processing complete - PAL program is valid
