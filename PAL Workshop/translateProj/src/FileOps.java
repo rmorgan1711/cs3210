@@ -17,17 +17,27 @@ public class FileOps {
      * @param fileName A file name without an extension (e.g. no ".pal")
      * @return A list of the lines in the file
      */
-    public static List<String> ReadFile(String fileName){
+    public static List<String> ReadFile(String fileName, String ext, String ext_alt){
         List<String> lines = new ArrayList<>();
         try{
 
-            FileReader fileReader = new FileReader(fileName);
+            FileReader fileReader = new FileReader(fileName + ext);
             BufferedReader br = new BufferedReader(fileReader);
             String line;
             while ((line = br.readLine()) != null)
                 lines.add(line);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        }catch (IOException e1){
+            try{
+                FileReader fileReader = new FileReader(fileName + ext_alt);
+                BufferedReader br = new BufferedReader(fileReader);
+                String line;
+                while ((line = br.readLine()) != null)
+                    lines.add(line);
+            }catch (IOException e2){
+                System.out.println("File could not be found. Searched for");
+                System.out.println("\t" + fileName + ext);
+                System.out.println("\t" + fileName + ext_alt);
+            }
         }
 
         return lines;

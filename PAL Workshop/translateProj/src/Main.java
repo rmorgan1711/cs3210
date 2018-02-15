@@ -1,7 +1,4 @@
-import java.io.*;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -11,6 +8,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static String EXT = ".pal";
+    public static String EXT_ALT = ".txt";
     public static Set<String> Registers = MakeRegisterSet();
     public static Set<String> RegOperands = Registers.stream().map(r -> r + ",").collect(Collectors.toSet());
     public static Map<String, OpGroup> OpTypeMap = MakeOpTypeMap();
@@ -24,14 +22,16 @@ public class Main {
 
     public static void main(String[] args){
 
-        System.out.println("The searching for " + args[0] + EXT);
+        System.out.println("The searching for " + args[0]);
         System.out.println("at location");
-        System.out.println(Paths.get("").toAbsolutePath().toString());
+        System.out.println("\t" + Paths.get("").toAbsolutePath().toString());
 
         String fileName = args[0];
-        List<String> lines = FileOps.ReadFile(fileName + EXT);
+        List<String> lines = FileOps.ReadFile(fileName, EXT, EXT_ALT);
+        if (lines.size() < 1)
+            return;
+
         lines = ConsumeToCode(lines);
-//        lines = RemoveCommentsAndBlanks(lines);
 
         List<String> outLines = FileOps.MakeHeaderLines(fileName);
         if (lines.size() < 1){
@@ -43,9 +43,9 @@ public class Main {
         }
 
         lines.set(0, RemoveComment(lines.get(0)));
-        String[] startLine = lines.get(0).split(" ");
+        String[] startLine = lines.get(0).replaceAll("\\s+", " ").split(" ");
         if (!startLine[0].equals("SRT")){
-            outLines.add("** error: Program must begin with SRT");
+            outLines.add("** error: Program must begin with SRT. Labels and tabs are not allowed.");
             ErrNumMap.put(ParseError.StartError, ErrNumMap.get(ParseError.StartError) + 1);
         }else {
             outLines.add(CodeLine + ".\t" + lines.get(0));
@@ -91,6 +91,7 @@ public class Main {
             if (line.isEmpty())
                 continue;
 
+            line = line.replaceAll("\\s+", " ");
             String[] tokens = line.split(" ");
 
             if (!OpTypeMap.containsKey(tokens[0])){
@@ -120,6 +121,12 @@ public class Main {
     //***************************************
     // Translation operations
     //***************************************
+    /**
+     * Consume file lines until a code line is reached
+     * @param lines All lines of the file to process
+     * @return Lines of the file to process with beginning blank
+     *          and comment lines removed
+     */
     public static List<String> ConsumeToCode(List<String> lines){
 
         for (int i = 0; i < lines.size(); ){
@@ -137,6 +144,11 @@ public class Main {
         return lines;
     }
 
+    /**
+     * Remove any comment from a line
+     * @param line The line to remove comments from
+     * @return The line stripped of any comments
+     */
     public static String RemoveComment(String line){
         if (line.contains(";"))
             line = line.substring(0, line.indexOf(';'));
@@ -145,29 +157,17 @@ public class Main {
         return line;
     }
 
-    public static List<String> RemoveCommentsAndBlanks(List<String> lines){
-        List<String> contentLines = new ArrayList<>();
-
-        for (int i = 0; i < lines.size(); i++){
-
-            String line = lines.get(i);
-
-            if (line.contains(";"))
-                line = line.substring(0, line.indexOf(';'));
-
-            line = line.trim();
-            if (line.length() == 0)
-                continue;
-
-            contentLines.add(line);
-        }
-        return contentLines;
-    }
-
+    /**
+     * Process and remove definition (DEF) lines and record any
+     * errors found
+     * @param lines Lines to process
+     * @param lineNum The line num for the code in the log file
+     * @return All lines following the last valid definition line
+     */
     public static List<String> ConsumeDefinitionLines(List<String> lines, int lineNum){
         List<String> outLines = new ArrayList<>();
         String line;
-        lines.set(0, RemoveComment(lines.get(0)));
+        lines.set(0, RemoveComment(lines.get(0)).replaceAll("\\s+", " "));
         while (lines.size() > 0 && lines.get(0).split(" ")[0].equals("DEF")){
             line = lines.get(0);
             outLines.add(lineNum + ".\t" + line);
@@ -202,6 +202,11 @@ public class Main {
         return outLines;
     }
 
+    /**
+     * Check a line for a label error
+     * @param line The line to check
+     * @return The error message or "" if no error
+     */
     public static String CheckLabel(String line){
         if (line.contains(":")){
             if (line.chars().filter(ch -> ch == ':').count() > 1){
@@ -222,6 +227,11 @@ public class Main {
         return "";
     }
 
+    /**
+     * Check the format of the label excluding the ":" character
+     * @param label The string to check
+     * @return The error message or "" if no error
+     */
     public static String CheckLabelFormat(String label){
         String errorMsg = "";
         if (label.length() > 5){
@@ -236,6 +246,13 @@ public class Main {
         return errorMsg;
     }
 
+    /**
+     * Process opcode and return error message if any
+     * @param op The op code type to check
+     * @param line The line containing the op code
+     * @param tokens Array of white separated strings in the line
+     * @return The error message or "" if no error
+     */
     public static String ProcessOpCode(OpGroup op, String line, String[] tokens){
         String errorMsg = "";
 
@@ -255,7 +272,7 @@ public class Main {
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else if (!Registers.contains(tokens[1]) && !MemLabels.containsKey(tokens[1])){
-                errorMsg = "** Error: The operand is not a register or mem label";
+                errorMsg = "** Error: The operand is not a register or defined mem label";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
         }
@@ -277,7 +294,7 @@ public class Main {
             }
 
             if (opError){
-                errorMsg = "** Error: An operand is not a register or mem label";
+                errorMsg = "** Error: An operand is not a register or defined mem label";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
         }
@@ -288,11 +305,11 @@ public class Main {
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else if (!RegOperands.contains(tokens[1]) && !MemLabOperands.containsKey(tokens[1])){
-                errorMsg = "** Error: Operands 1 and 2 must be registers or mem labels";
+                errorMsg = "** Error: Operands 1 and 2 must be registers or defined mem labels";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else if (!RegOperands.contains(tokens[2]) && !MemLabOperands.containsKey(tokens[2])){
-                errorMsg = "** Error: Operands 1 and 2 must be registers or mem labels";
+                errorMsg = "** Error: Operands 1 and 2 must be registers or defined mem labels";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else{
@@ -328,11 +345,11 @@ public class Main {
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else if (!RegOperands.contains(tokens[1]) && !MemLabOperands.containsKey(tokens[1])){
-                errorMsg = "** Error: Operands must be registers or memory labels";
+                errorMsg = "** Error: Operands must be registers or defined memory labels";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else if (!Registers.contains(tokens[2]) && !MemLabels.containsKey(tokens[2])){
-                errorMsg = "** Error: Operands must be registers or memory labels";
+                errorMsg = "** Error: Operands must be registers or defined memory labels";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
         }
@@ -346,7 +363,7 @@ public class Main {
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
             else if (!Registers.contains(tokens[2]) && !MemLabels.containsKey(tokens[2])){
-                errorMsg = "** Error: 2nd operand must be a register or memory label";
+                errorMsg = "** Error: 2nd operand must be a register or defined memory label";
                 ErrNumMap.put(ParseError.BadOperand, ErrNumMap.get(ParseError.BadOperand) + 1);
             }
         }
@@ -359,6 +376,12 @@ public class Main {
         return errorMsg;
     }
 
+    /**
+     * Check that a line contains the expected number of operands
+     * @param line The line to check
+     * @param num The number of operands expected
+     * @return The error message or "" if no error
+     */
     public static String CheckOperandNum(String line, int num){
         String errorMsg = "";
 
@@ -379,6 +402,12 @@ public class Main {
         return "";
     }
 
+    /**
+     * Check tracking tables and report memory labels defined more then
+     * once, labels that are defined but never branched to, and labels
+     * that are branched to but never defined
+     * @return Error report lines or an empty list if no errors
+     */
     public static List<String> CheckLabelBranchAndDef(){
         List<String> outLines = new ArrayList<>();
 
@@ -405,6 +434,12 @@ public class Main {
             outLines.add("\t" + labelsBranchedToButNotDefined.toString());
             ErrNumMap.put(ParseError.LabelError, ErrNumMap.get(ParseError.LabelError) + 1);
         }
+
+        if (outLines.size() > 0){
+            outLines.add(0, "\r\nThe following errors may be due to invalid lines");
+            outLines.add(1, "above not being fully processed");
+        }
+
         return outLines;
     }
 
@@ -412,6 +447,10 @@ public class Main {
     //***************************************
     // Global data creators
     //***************************************
+    /**
+     * Produce the set of allowed register terminal symbols
+     * @return The set of allowed register terminal symbols
+     */
     public static Set<String> MakeRegisterSet(){
         Set<String> regSet = new HashSet<>();
         regSet.add("R0");
@@ -425,6 +464,10 @@ public class Main {
         return  regSet;
     }
 
+    /**
+     * Produce a map from operator terminals to the op code type
+     * @return Map from operator terminals to enum type
+     */
     public static Map<String, OpGroup> MakeOpTypeMap(){
         Map<String, OpGroup> opMap = new HashMap<>();
         opMap.put("SRT", OpGroup.Start);
@@ -445,6 +488,11 @@ public class Main {
         return  opMap;
     }
 
+    /**
+     * Produce a map from error type to error count with count
+     * initialized to 0
+     * @return Map from error type to error count
+     */
     public static Map<ParseError, Integer> MakeErrorCountMap(){
         Map<ParseError, Integer> errorCountMap = new HashMap<>();
         for (ParseError err : ParseError.values())
@@ -452,6 +500,10 @@ public class Main {
         return  errorCountMap;
     }
 
+    /**
+     * Produce a map from error type to its description
+     * @return Map from error type to error description
+     */
     public static Map<ParseError, String> MakeErrorDescriptionMap(){
         Map<ParseError, String> eMap = new HashMap<>();
         eMap.put(ParseError.StartError, "Program start invalid");

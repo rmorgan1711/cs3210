@@ -1,0 +1,29 @@
+Compilation Log File
+Command argument: PAL Program 1
+Log file name: PAL Program 1.log
+Begin time: 15/02/18 10:52:32
+
+
+1.	SRT
+2.	MOVEI     0, R0
+** Error: The opcode is not recognized
+3.	MOVEI     1, R1
+** Error: The opcode is not recognized
+4.	MOVEI     12, R2
+** Error: The opcode is not recognized
+5.	TOP:
+6.	BGT       R1, R2, CONT
+7.	ADD       R0, R1, R0
+8.	INC       R1
+9.	BR        TOP
+10.	CONT:   MOVE      R0, TOTAL
+** Error: 1st operand must be base 8 immediate value
+11.	END
+
+Summary --------------
+
+Total errors = 4
+
+	1 Operand error(s)
+	3 Opcode invalid error(s)
+Processing complete - PAL program is NOT valid

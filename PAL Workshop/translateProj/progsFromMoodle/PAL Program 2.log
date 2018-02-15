@@ -1,0 +1,52 @@
+Compilation Log File
+Command argument: PAL Program 2
+Log file name: PAL Program 2.log
+Begin time: 15/02/18 10:51:39
+
+
+1.	SRT
+2.	MOVE    50, FORTY
+** Error: 2nd operand must be a register or defined memory label
+3.	MOVE    5,  FIVE
+** Error: 2nd operand must be a register or defined memory label
+4.	MOVE    2,  TWO
+** Error: 2nd operand must be a register or defined memory label
+5.	COPY    HRS, R1
+** Error: Operands must be registers or defined memory labels
+6.	COPY    RT,  R2
+** Error: Operands must be registers or defined memory labels
+7.	BLT     R1, FORTY, REG
+** Error: The opcode is not recognized
+8.	BEQ     R1, FORTY, REG
+** Error: Operands 1 and 2 must be registers or defined mem labels
+9.	MUL     FORTY, R2, R0
+** Error: An operand is not a register or defined mem label
+10.	DIV     R2, TWO, R3
+** Error: An operand is not a register or defined mem label
+11.	ADD     R2, R3, R3
+12.	SUB     R1, FORTY, R5
+** Error: An operand is not a register or defined mem label
+13.	MUL     R5, R3, R6
+14.	ADD     R0, R6, R0
+15.	BR      DECT
+16.	REG:    MUL     R1, R2, R0
+17.	DECT:   DIV     R0, FIVE, R6
+** Error: An operand is not a register or defined mem label
+18.	SUB     R0, R6, R0
+19.	MOVE    R0, PAY
+** Error: 1st operand must be base 8 immediate value
+20.	END
+
+The following errors may be due to invalid lines
+above not being fully processed
+** Error: Labels defined but not branched to:
+	[REG]
+
+Summary --------------
+
+Total errors = 13
+
+	1 Opcode invalid error(s)
+	11 Operand error(s)
+	1 Label error(s)
+Processing complete - PAL program is NOT valid
