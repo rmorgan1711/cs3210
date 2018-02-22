@@ -1,0 +1,26 @@
+/* TOP LEVEL PROGRAM */
+form ::= attribute dot | function dot
+
+/* DECISIONS */
+if_expr ::= if if_clauses end "."
+if_clauses ::= if_clause | if_clause ";" if_clauses
+if_clause ::= guard clause_body
+guard ::= exprs | exprs ";" guard
+clause_body ::= "->" exprs
+
+
+/* LOOPS */
+function ::= function_clauses
+function_clauses ::= function_clause | function_clause ";" function_clauses
+function_clause ::= "atom" clause_args clause_guard clause_body
+
+clause_guard ::= "when"
+clause_guard ::= ""
+clause_args ::= pat_argument_list
+pat_argument_list ::= "(" ")"
+pat_argument_list ::= "(" pat_exprs ")"
+
+loopExample ::= whileLessThan10"("i")" "->" "when" i ">= 10" "ok;" "when" i "< 10" "->" whileLessThan10"("i-1")."
+
+*/ Assignment of values */
+assignment ::= [A-Z](a-zA-Z0-9)* "=" expr "."

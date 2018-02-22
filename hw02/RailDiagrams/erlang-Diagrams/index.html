@@ -1,0 +1,394 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="generator" content="Railroad Diagram Generator 1.48.1593"><style type="text/css" xml:space="preserve">
+    ::-moz-selection
+    {
+      color: #FFFCF0;
+      background: #0F0C00;
+    }
+    ::selection
+    {
+      color: #FFFCF0;
+      background: #0F0C00;
+    }      
+    .ebnf a
+    {
+      text-decoration: none;
+    }
+    .ebnf a:hover
+    {
+      color: #050400;
+      text-decoration: underline;
+    }    
+    .signature
+    {
+      color: #806600;
+      font-size: 11px;
+      text-align: right;
+    }
+    body
+    {
+      font: normal 12px Verdana, sans-serif;
+      color: #0F0C00;
+      background: #FFFCF0;
+    }
+    a:link, a:visited
+    {
+      color: #0F0C00;
+    }
+    a:link.signature, a:visited.signature
+    {
+      color: #806600;
+    }
+    a.button, #tabs li a
+    {
+      padding: 0.25em 0.5em;
+      border: 1px solid #806600;
+      background: #F1E8C6;
+      color: #806600;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a.button:hover, #tabs li a:hover
+    {
+      color: #050400;
+      background: #FFF6D1;
+      border-color: #050400;       
+    }     
+    #tabs
+    {
+      padding: 3px 10px;
+      margin-left: 0;
+      margin-top: 58px;
+      border-bottom: 1px solid #0F0C00;
+    }  
+    #tabs li
+    {
+      list-style: none;
+      margin-left: 5px;
+      display: inline;
+    }
+    #tabs li a
+    {     
+      border-bottom: 1px solid #0F0C00;
+    }
+    #tabs li a.active
+    {
+      color: #0F0C00;
+      background: #FFFCF0;
+      border-color: #0F0C00;
+      border-bottom: 1px solid #FFFCF0;
+      outline: none;
+    }
+    #divs div
+    {
+      display: none;
+      overflow:auto;
+    }
+    #divs div.active
+    {
+      display: block;
+    }
+    #text
+    {
+      border-color: #806600;
+      background: #FFFEFA;
+      color: #050400;
+    }
+    .small
+    {
+      vertical-align: top;
+      text-align: right;
+      font-size: 9px;
+      font-weight: normal;
+      line-height: 120%;
+    }
+    td.small
+    {
+      padding-top: 0px;
+    }
+    .hidden
+    {
+      visibility: hidden;
+    }
+    td:hover .hidden 
+    {
+      visibility: visible;
+    }
+    div.download
+    {
+      display: none;
+      background: #FFFCF0;
+      position: absolute;
+      right: 34px;
+      top: 94px;
+      padding: 10px;
+      border: 1px dotted #0F0C00;
+    }
+    #divs div.ebnf, div.ebnf
+    {
+      display: block;
+      padding-left: 16px;
+      padding-top: 2px; 
+      padding-bottom: 2px; 
+      background: #FFF6D1;
+    }
+    tr.option-line td:first-child
+    {
+      text-align: right
+    }
+    tr.option-text td
+    {
+      padding-bottom: 10px
+    }
+    table.palette
+    {
+      border-top: 1px solid #050400;
+      border-right: 1px solid #050400;
+      margin-bottom: 4px
+    }
+    td.palette
+    {
+      border-bottom: 1px solid #050400;
+      border-left: 1px solid #050400;
+    }
+    a.palette
+    {
+      padding: 2px 3px 2px 10px;
+      text-decoration: none;
+    }
+    .palette
+    {
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      -ms-user-select: none;
+    }
+  </style></head>
+   <body>
+      
+      <p style="font-size: 14px; font-weight:bold"><a name="form">form:</a></p>
+      <img border="0" src="diagram/form.png" height="80" width="228" usemap="#form.map"><map name="form.map">
+         <area shape="rect" coords="49,1,119,33" href="#attribute" title="attribute">
+         <area shape="rect" coords="49,45,115,77" href="#function" title="function">
+         <area shape="rect" coords="159,1,199,33" href="#dot" title="dot"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#form" title="form" shape="rect">form</a>     ::= ( <a href="#attribute" title="attribute" shape="rect">attribute</a> | <a href="#function" title="function" shape="rect">function</a> ) <a href="#dot" title="dot" shape="rect">dot</a></pre></div>
+         
+      </p>
+      
+      <p>no references</p><br><p style="font-size: 14px; font-weight:bold"><a name="if_expr">if_expr:</a></p>
+      <img border="0" src="diagram/if_expr.png" height="80" width="320" usemap="#if_expr.map"><map name="if_expr.map">
+         <area shape="rect" coords="29,45,55,77" href="#if" title="if">
+         <area shape="rect" coords="95,45,165,77" href="#if_clause" title="if_clause">
+         <area shape="rect" coords="205,45,247,77" href="#end" title="end"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#if_expr" title="if_expr" shape="rect">if_expr</a>  ::= <a href="#if" title="if" shape="rect">if</a> <a href="#if_clause" title="if_clause" shape="rect">if_clause</a> ( ';' <a href="#if_clause" title="if_clause" shape="rect">if_clause</a> )* <a href="#end" title="end" shape="rect">end</a> '.'</pre></div>
+         
+      </p>
+      
+      <p>no references</p><br><p style="font-size: 14px; font-weight:bold"><a name="if_clause">if_clause:</a></p>
+      <img border="0" src="diagram/if_clause.png" height="80" width="264" usemap="#if_clause.map"><map name="if_clause.map">
+         <area shape="rect" coords="49,45,101,77" href="#exprs" title="exprs">
+         <area shape="rect" coords="141,45,235,77" href="#clause_body" title="clause_body"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#if_clause" title="if_clause" shape="rect">if_clause</a>
+         ::= <a href="#exprs" title="exprs" shape="rect">exprs</a> ( ';' <a href="#exprs" title="exprs" shape="rect">exprs</a> )* <a href="#clause_body" title="clause_body" shape="rect">clause_body</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#if_expr" title="if_expr">if_expr</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="clause_body">clause_body:</a></p>
+      <img border="0" src="diagram/clause_body.png" height="36" width="166" usemap="#clause_body.map"><map name="clause_body.map">
+         <area shape="rect" coords="85,1,137,33" href="#exprs" title="exprs"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#clause_body" title="clause_body" shape="rect">clause_body</a>
+         ::= '-&gt;' <a href="#exprs" title="exprs" shape="rect">exprs</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#function_clause" title="function_clause">function_clause</a></li>
+            
+            <li><a href="#if_clause" title="if_clause">if_clause</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="function">function:</a></p>
+      <img border="0" src="diagram/function.png" height="80" width="210" usemap="#function.map"><map name="function.map">
+         <area shape="rect" coords="49,45,161,77" href="#function_clause" title="function_clause"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#function" title="function" shape="rect">function</a> ::= <a href="#function_clause" title="function_clause" shape="rect">function_clause</a> ( ';' <a href="#function_clause" title="function_clause" shape="rect">function_clause</a> )*</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#form" title="form">form</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="function_clause">function_clause:</a></p>
+      <img border="0" src="diagram/function_clause.png" height="36" width="454" usemap="#function_clause.map"><map name="function_clause.map">
+         <area shape="rect" coords="103,1,193,33" href="#clause_args" title="clause_args">
+         <area shape="rect" coords="213,1,311,33" href="#clause_guard" title="clause_guard">
+         <area shape="rect" coords="331,1,425,33" href="#clause_body" title="clause_body"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#function_clause" title="function_clause" shape="rect">function_clause</a>
+         ::= 'atom' <a href="#clause_args" title="clause_args" shape="rect">clause_args</a> <a href="#clause_guard" title="clause_guard" shape="rect">clause_guard</a> <a href="#clause_body" title="clause_body" shape="rect">clause_body</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#function" title="function">function</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="clause_guard">clause_guard:</a></p>
+      <img border="0" src="diagram/clause_guard.png" height="80" width="152">
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#clause_guard" title="clause_guard" shape="rect">clause_guard</a>
+         ::= 'when'
+           | ''</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#function_clause" title="function_clause">function_clause</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="clause_args">clause_args:</a></p>
+      <img border="0" src="diagram/clause_args.png" height="36" width="186" usemap="#clause_args.map"><map name="clause_args.map">
+         <area shape="rect" coords="29,1,157,33" href="#pat_argument_list" title="pat_argument_list"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#clause_args" title="clause_args" shape="rect">clause_args</a>
+         ::= <a href="#pat_argument_list" title="pat_argument_list" shape="rect">pat_argument_list</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#function_clause" title="function_clause">function_clause</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="pat_argument_list">pat_argument_list:</a></p>
+      <img border="0" src="diagram/pat_argument_list.png" height="68" width="270" usemap="#pat_argument_list.map"><map name="pat_argument_list.map">
+         <area shape="rect" coords="95,33,175,65" href="#pat_exprs" title="pat_exprs"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#pat_argument_list" title="pat_argument_list" shape="rect">pat_argument_list</a>
+         ::= '(' <a href="#pat_exprs" title="pat_exprs" shape="rect">pat_exprs</a>? ')'</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#clause_args" title="clause_args">clause_args</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="loopExample">loopExample:</a></p>
+      <img border="0" src="diagram/loopExample.png" height="164" width="1242" usemap="#loopExample.map"><map name="loopExample.map">
+         <area shape="rect" coords="49,35,169,67" href="#whileLessThan10" title="whileLessThan10">
+         <area shape="rect" coords="235,35,257,67" href="#i" title="i">
+         <area shape="rect" coords="453,35,475,67" href="#i" title="i">
+         <area shape="rect" coords="711,35,733,67" href="#i" title="i">
+         <area shape="rect" coords="881,35,1001,67" href="#whileLessThan10" title="whileLessThan10">
+         <area shape="rect" coords="1067,35,1103,67" href="#i-1" title="i-1">
+         <area shape="rect" coords="49,113,137,145" href="#Assignment" title="Assignment">
+         <area shape="rect" coords="157,113,189,145" href="#of" title="of">
+         <area shape="rect" coords="229,79,287,111" href="#values" title="values"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#loopExample" title="loopExample" shape="rect">loopExample</a>
+         ::= <a href="#whileLessThan10" title="whileLessThan10" shape="rect">whileLessThan10</a> '(' <a href="#i" title="i" shape="rect">i</a> ')' '-&gt;' 'when' <a href="#i" title="i" shape="rect">i</a> '&gt;= 10' 'ok;' 'when' <a href="#i" title="i" shape="rect">i</a> '&lt; 10' '-&gt;' <a href="#whileLessThan10" title="whileLessThan10" shape="rect">whileLessThan10</a> '(' <a href="#i-1" title="i-1" shape="rect">i-1</a> ').'*
+           | <a href="#Assignment" title="Assignment" shape="rect">Assignment</a> <a href="#of" title="of" shape="rect">of</a> <a href="#values" title="values" shape="rect">values</a>*
+           |</pre></div>
+         
+      </p>
+      
+      <p>no references</p><br><p style="font-size: 14px; font-weight:bold"><a name="assignment">assignment:</a></p>
+      <img border="0" src="diagram/assignment.png" height="70" width="422" usemap="#assignment.map"><map name="assignment.map">
+         <area shape="rect" coords="131,1,213,33" href="#a-zA-Z0-9" title="a-zA-Z0-9">
+         <area shape="rect" coords="303,35,349,67" href="#expr" title="expr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#assignment" title="assignment" shape="rect">assignment</a>
+         ::= [A-Z] <a href="#a-zA-Z0-9" title="a-zA-Z0-9" shape="rect">a-zA-Z0-9</a>* '=' <a href="#expr" title="expr" shape="rect">expr</a> '.'</pre></div>
+         
+      </p>
+      
+      <p>no references</p><br><hr>
+      
+      <p>
+         
+         <table class="signature" border="0">
+            
+            <tr>
+               
+               <td style="width: 100%">&nbsp;</td>
+               
+               <td valign="top">
+                  
+                  <nobr class="signature">... generated by <a name="Railroad-Diagram-Generator" class="signature" title="http://www.bottlecaps.de/rr/ui" href="http://www.bottlecaps.de/rr/ui" target="_blank">Railroad Diagram Generator</a></nobr>
+                  
+               </td>
+               
+               <td><a name="Railroad-Diagram-Generator" title="http://www.bottlecaps.de/rr/ui" href="http://www.bottlecaps.de/rr/ui" target="_blank">
+                     <img border="0" src="diagram/Railroad-Diagram-Generator.png" height="16" width="16"></a></td>
+               
+            </tr>
+            
+         </table>
+         
+      </p>
+      
+   </body>
+</html>
