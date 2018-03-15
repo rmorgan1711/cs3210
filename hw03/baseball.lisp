@@ -29,14 +29,13 @@
 ;(defun gravity 9.8)  ;; in m/s
 ;(defun pi 3.14159)
 
-(defconstant gravity 9.8)   ;; in m/s
-(defconstant pi 3.14159)
+(defconstant GRAVITY 9.8)   ;; in m/s
+(defconstant PI 3.14159)
 
 ;; Problem 1
 
 (defun pos (a v u tm)
     (+ (* .5 a tm tm) (* v tm) u)
-    (- (* u t) (* 0.5 a tm) (* v tm))
 )
 
 ;; you need to complete this procedure, then show some test cases
@@ -52,7 +51,7 @@
 
 (defun root1 (a b c)
     (setq test (- (* b b) (* 4 a c)))
-    (if (> test 0)
+    (if (>= test 0)
         (/ (- (- 0 b) (sqrt test)) (* 2 a))
         ()
     )
@@ -60,7 +59,7 @@
 
 (defun root2 (a b c)
     (setq test (- (* b b) (* 4 a c)))
-    (if (> test 0)
+    (if (>= test 0)
         (/ (+ (- 0 b) (sqrt test)) (* 2 a))
         ()
     )
@@ -71,14 +70,18 @@
 ;; Problem 3
 
 (defun time-to-impact (vertical-velocity elevation)
-    (YOUR-CODE-HERE)
+    (setq a (* 0.5 GRAVITY (- 1)))
+    (setq r1 (root1 a vertical-velocity elevation))
+    (setq r2 (root2 a vertical-velocity elevation))
+
+    (if (>= r1 0) r1 r2)
 )
 
 ;; Note that if we want to know when the ball drops to a particular height r 
 ;; (for receiver), we have
 
 (defun time-to-height (vertical-velocity elevation target-elevation)
-    (YOUR-CODE-HERE)
+    (time-to-impact vertical-velocity (- elevation target-elevation))
 )
 
 ;; Problem 4
