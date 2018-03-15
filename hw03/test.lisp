@@ -31,3 +31,26 @@
 (defun time-to-height (vertical-velocity elevation target-elevation)
     (time-to-impact vertical-velocity (- elevation target-elevation))
 )
+
+(defun degree2radian (deg)
+    (/ (*  deg pi) 180.)
+)
+
+(defun travel-distance-simple (elevation velocity angle)
+    (setq vx (* velocity (cos (degree2radian angle))))
+    (setq vy (* velocity (sin (degree2radian angle))))
+    (setq tf (time-to-impact vy elevation))
+    (* vx tf)
+)
+
+(defun find-best-angle (velocity elevation)
+    (setq startDeg 0)
+
+    (setq a (travel-distance-simple elevation velocity startDeg))
+    (setq b (travel-distance-simple elevation velocity (+ 1 startDeg)))
+    (list a b)
+    ; (COND 
+    ;     ((> b a) a)
+    ;     (t b)
+    ; )
+)

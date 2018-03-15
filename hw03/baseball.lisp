@@ -94,7 +94,10 @@
 )
 
 (defun travel-distance-simple (elevation velocity angle)
-    (YOUR-CODE-HERE)
+    (setq vx (* velocity (cos (degree2radian angle))))
+    (setq vy (* velocity (sin (degree2radian angle))))
+    (setq tf (time-to-impact vy elevation))
+    (* vx tf)
 )
 
 ;; let's try this out for some example values.  Note that we are going to 
