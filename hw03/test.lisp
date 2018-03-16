@@ -45,12 +45,40 @@
 
 (defun find-best-angle (velocity elevation)
     (setq startDeg 0)
+    (setq a0 (travel-distance-simple elevation velocity startDeg))
+    (setq a1 (travel-distance-simple elevation velocity (+ 1 startDeg)))
+    
+)
 
-    (setq a (travel-distance-simple elevation velocity startDeg))
-    (setq b (travel-distance-simple elevation velocity (+ 1 startDeg)))
-    (list a b)
-    ; (COND 
-    ;     ((> b a) a)
-    ;     (t b)
-    ; )
+(defun asdf (velocity elevation angle)
+    (setq a0 (travel-distance-simple elevation velocity angle))
+    (setq a1 (travel-distance-simple elevation velocity (+ 1 angle)))
+
+    (format t "~a~%" (list angle a0 a1))
+
+    (cond
+        ((= angle 89)
+            (if (= a0 (max a0 a1)) angle (+ 1 angle))
+        )
+        ((> a1 a0)
+            (setq a3 (asdf velocity elevation (+ 1 angle)))
+            ; (format t "~a~%" (list a1))
+            (if (> a3 a1) 
+                (format t "~a~%" (list (+ 1 angle) angle))
+                (format t "~a~%" (list angle (+ 1 angle)))
+            )
+
+            (if (> a3 a1) (+ 1 angle) angle)
+        )
+        (t
+            (setq a3 (asdf velocity elevation (+ 1 angle)))
+            ; (format t "~a~%" (list a0))
+            (if (> a3 a0) 
+                (format t "~a~%" (list (+ 1 angle) angle))
+                (format t "~a~%" (list angle (+ 1 angle)))
+            )
+
+            (if (> a3 a0) (+ 1 angle) angle)
+        )
+    )
 )

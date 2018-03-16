@@ -51,7 +51,7 @@
 
 (defun root1 (a b c)
     (setq test (- (* b b) (* 4 a c)))
-    (if (>= test 0)
+    (if ((and (>= test 0) (> a 0))
         (/ (- (- 0 b) (sqrt test)) (* 2 a))
         ()
     )
@@ -142,7 +142,13 @@
 (defun alpha-increment 0.01)
 
 (defun find-best-angle (velocity elevation)
-    (YOUR-CODE-HERE)
+    (setq startDeg 0)
+    (setq a0 (travel-distance-simple elevation velocity startDeg))
+    (setq a1 (travel-distance-simple elevation velocity (+ 1 startDeg)))
+    
+    (cond
+        ()
+    )
 )
 
 ;; find best angle

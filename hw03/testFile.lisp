@@ -49,7 +49,9 @@
 ; (format t "~a~%" (travel-distance-simple 1 45 45))
 ; (format t "~a~%" (travel-distance-simple 1 45 90))
 
-(write-line "----------------")
+; (write-line "----------------")
 
-(write-line "Test find-best-angle")
-(format t "~a~%" (find-best-angle 45 1))
+; (write-line "Test find-best-angle")
+; (format t "~a~%" (find-best-angle 45 1))
+
+(format t "~a~%" (asdf 45 1 0))
