@@ -52,6 +52,6 @@
 ; (write-line "----------------")
 
 ; (write-line "Test find-best-angle")
-; (format t "~a~%" (find-best-angle 45 1))
-
-(format t "~a~%" (asdf 45 1 0))
+(format t "~a~%" (find-best-angle 45 1))
+(format t "~a~%" (find-best-angle 100 3))
+(format t "~a~%" (find-best-angle 0 3))

@@ -44,41 +44,19 @@
 )
 
 (defun find-best-angle (velocity elevation)
-    (setq startDeg 0)
-    (setq a0 (travel-distance-simple elevation velocity startDeg))
-    (setq a1 (travel-distance-simple elevation velocity (+ 1 startDeg)))
-    
+    (find-best-recurse velocity elevation 0 0)
 )
 
-(defun asdf (velocity elevation angle)
-    (setq a0 (travel-distance-simple elevation velocity angle))
-    (setq a1 (travel-distance-simple elevation velocity (+ 1 angle)))
-
-    (format t "~a~%" (list angle a0 a1))
+(defun find-best-recurse (velocity elevation angle currBest)
+    (setq d0 (travel-distance-simple elevation velocity angle))
+    (setq d1 (travel-distance-simple elevation velocity (+ 1 angle)))
+    (setq dcurrBest (travel-distance-simple elevation velocity currBest))
+    (setq dBest (max d0 d1 dcurrBest))
 
     (cond
-        ((= angle 89)
-            (if (= a0 (max a0 a1)) angle (+ 1 angle))
-        )
-        ((> a1 a0)
-            (setq a3 (asdf velocity elevation (+ 1 angle)))
-            ; (format t "~a~%" (list a1))
-            (if (> a3 a1) 
-                (format t "~a~%" (list (+ 1 angle) angle))
-                (format t "~a~%" (list angle (+ 1 angle)))
-            )
-
-            (if (> a3 a1) (+ 1 angle) angle)
-        )
-        (t
-            (setq a3 (asdf velocity elevation (+ 1 angle)))
-            ; (format t "~a~%" (list a0))
-            (if (> a3 a0) 
-                (format t "~a~%" (list (+ 1 angle) angle))
-                (format t "~a~%" (list angle (+ 1 angle)))
-            )
-
-            (if (> a3 a0) (+ 1 angle) angle)
-        )
+        ((>= angle 91) currBest)
+        ((= dBest dcurrBest) (find-best-recurse velocity elevation (+ 1 angle) currBest))
+        ((= dBest d1) (find-best-recurse velocity elevation (+ 1 angle) (+ 1 angle)))
+        ((= dBest d0) (find-best-recurse velocity elevation (+ 1 angle) angle))        
     )
 )
