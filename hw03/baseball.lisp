@@ -40,18 +40,11 @@
 
 ;; you need to complete this procedure, then show some test cases
 
-; (pos 0 0 0 0)
-; (pos 0 0 20 0)
-; (pos 0 5 10 10)
-; (pos 2 2 2 2)
-; (pos 5 5 5 5)
-
-
 ;; Problem 2
 
 (defun root1 (a b c)
     (setq test (- (* b b) (* 4 a c)))
-    (if ((and (>= test 0) (> a 0))
+    (if (and (>= test 0) (/= a 0))
         (/ (- (- 0 b) (sqrt test)) (* 2 a))
         ()
     )
@@ -59,7 +52,7 @@
 
 (defun root2 (a b c)
     (setq test (- (* b b) (* 4 a c)))
-    (if (>= test 0)
+    (if (and (>= test 0) (/= a 0))
         (/ (+ (- 0 b) (sqrt test)) (* 2 a))
         ()
     )
@@ -74,7 +67,7 @@
     (setq r1 (root1 a vertical-velocity elevation))
     (setq r2 (root2 a vertical-velocity elevation))
 
-    (if (>= r1 0) r1 r2)
+    (if (> r2 r1) r2 r1)
 )
 
 ;; Note that if we want to know when the ball drops to a particular height r 
@@ -139,15 +132,21 @@
 ;; assume that angle is between 0 and (/ pi 2) radians or between 0 and 90
 ;; degrees
 
-(defun alpha-increment 0.01)
-
 (defun find-best-angle (velocity elevation)
-    (setq startDeg 0)
-    (setq a0 (travel-distance-simple elevation velocity startDeg))
-    (setq a1 (travel-distance-simple elevation velocity (+ 1 startDeg)))
-    
+    (find-best-recurse velocity elevation 0 0)
+)
+
+(defun find-best-recurse (velocity elevation angle currBest)
+    (setq d0 (travel-distance-simple elevation velocity angle))
+    (setq d1 (travel-distance-simple elevation velocity (+ 1 angle)))
+    (setq dcurrBest (travel-distance-simple elevation velocity currBest))
+    (setq dBest (max d0 d1 dcurrBest))
+
     (cond
-        ()
+        ((>= angle 91) currBest)
+        ((= dBest dcurrBest) (find-best-recurse velocity elevation (+ 1 angle) currBest))
+        ((= dBest d1) (find-best-recurse velocity elevation (+ 1 angle) (+ 1 angle)))
+        ((= dBest d0) (find-best-recurse velocity elevation (+ 1 angle) angle))        
     )
 )
 

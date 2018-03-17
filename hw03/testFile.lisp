@@ -1,4 +1,4 @@
-(defvar filename "test.lisp")
+(defvar filename "baseball.lisp")
 (load filename)
 
 ; (write-line "Position tests")
@@ -19,8 +19,8 @@
 ; (format t "(root2 1 1 0) returns ~a~%" (root2 1 1 0))
 ; (format t "(root1 1 2 -8) returns ~a~%" (root1 1 2 (- 0 8)))
 ; (format t "(root2 1 2 -8) returns ~a~%" (root2 1 2 (- 0 8)))
-; (format t "(root1 3 1 5) returns ~a~%" (root1 3 1 5))
-; (format t "(root2 3 1 5) returns ~a~%" (root2 3 1 5))
+; (format t "(root1 0 1 5) returns ~a~%" (root1 3 1 5))
+; (format t "(root2 0 1 5) returns ~a~%" (root2 3 1 5))
 
 ; (write-line "----------------")
 
@@ -36,22 +36,22 @@
 
 ; (write-line "Test time-to-height")
 ; (format t "v = 5    h = 1:  target = 0.5:  ~a~%" (time-to-height 5 1 0.5))
-; (format t "v = 0    h = 1:  target = 1:    ~a~%" (time-to-height 0 1 1))
+; (format t "v = 0    h = 2:  target = 1:    ~a~%" (time-to-height 0 2 1))
 ; (format t "v = 0    h = 10: target = 5:    ~a~%" (time-to-height 0 10 5))
 ; (format t "v = 100  h = 10: target = 5:    ~a~%" (time-to-height 100 10 5))
 ; (format t "v = 100  h = 0:  target = 50:   ~a~%" (time-to-height 100 0 50))
 ; (format t "v = 0    h = 0:  target = 0:    ~a~%" (time-to-height 0 0 0))
 
-; (write-line "----------------")
+(write-line "----------------")
 
-; (write-line "Test travel-distance-simple")
-; (format t "~a~%" (travel-distance-simple 1 45 0))
-; (format t "~a~%" (travel-distance-simple 1 45 45))
-; (format t "~a~%" (travel-distance-simple 1 45 90))
+(write-line "Test travel-distance-simple")
+(format t "e = 1  v = 45 angle = 0:   ~a~%" (travel-distance-simple 1 45 0))
+(format t "e = 1  v = 45 angle = 45:  ~a~%" (travel-distance-simple 1 45 45))
+(format t "e = 1  v = 45 angle = 90:  ~a~%" (travel-distance-simple 1 45 90))
 
-; (write-line "----------------")
+(write-line "----------------")
 
-; (write-line "Test find-best-angle")
-(format t "~a~%" (find-best-angle 45 1))
-(format t "~a~%" (find-best-angle 100 3))
-(format t "~a~%" (find-best-angle 0 3))
+(write-line "Test find-best-angle")
+(format t "v = 45   e = 1:  ~a~%" (find-best-angle 45 1))
+(format t "v = 100  e = 3:  ~a~%" (find-best-angle 100 3))
+(format t "v = 0    e = 1:  ~a~%" (find-best-angle 0 1))
