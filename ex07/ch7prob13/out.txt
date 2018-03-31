@@ -1,0 +1,6 @@
+Left to right order
+sum1 = 46
+sum2 = 48
+Sumulate right to left order
+sum1 = 46
+sum2 = 44
