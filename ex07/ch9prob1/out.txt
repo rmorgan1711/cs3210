@@ -1,0 +1,5 @@
+Time taken for 50 calls to pass by reference version:
+0.159886
+Time taken for 50 calls to pass by value:
+0.391287
+Pass by value took 2.447287 times as long.
