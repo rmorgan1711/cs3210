@@ -1,0 +1,49 @@
+/DoTriangle {
+	newpath
+	100 200 moveto
+	200 250 lineto
+	100 300 lineto
+	closepath
+	gsave
+	0.5 setgray
+	fill
+	grestore
+	4 setlinewidth
+	0.75 setgray
+	stroke
+} def
+
+/NormalText {
+	/Courier findfont
+	12 scalefont
+	setfont
+	0 setgray
+	newpath
+	100 500 moveto
+	(Example 3) show
+} def
+
+
+/WeirdText {
+	/Courier findfont
+	32 scalefont
+	setfont
+	100 200 translate
+	45 rotate
+	2 1 scale
+	newpath
+	0 0 moveto
+	(Example 4) true charpath
+	0.9 setlinewidth
+	%0.4 setgray
+	0.5 1 0.5 setrgbcolor
+	gsave
+	stroke
+	grestore
+	fill
+} def
+
+
+DoTriangle
+NormalText
+WeirdText
