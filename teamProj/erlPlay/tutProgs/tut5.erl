@@ -14,5 +14,5 @@ convert_to_celsius({Name, {f, Temp}}) -> % Do the conversion
 	{Name, {c, (Temp - 32) * 5 / 9}}.
 
 print_temp({Name, {c, Temp}}) ->
-	io:format("~-15w ~w c~n", [Name, Temp]).
+	io:format("~-15s ~.1f c~n", [Name, Temp+0.0]).
 
