@@ -1,0 +1,50 @@
+/pWidth 300 def
+/pHeight 150 def
+
+<< /PageSize [pWidth pHeight] /ImagingBBox null>> setpagedevice
+
+/DrawSquare {
+	0.765 0.878 0.91 setrgbcolor
+	newpath
+	0 0 moveto
+	pWidth 0 lineto
+	pWidth pHeight lineto
+	0 pHeight lineto
+	closepath
+	fill
+} def
+
+/Center { 
+	dup stringwidth pop 2 div neg 0 rmoveto
+} def
+
+/MovePcnt {
+	pHeight mul
+	exch
+	pWidth mul
+	exch	
+	moveto
+} def
+
+/UpdateFont {
+	/Courier findfont
+	2 1 roll scalefont
+	setfont	
+} def
+
+DrawSquare
+	
+0 0 0 setrgbcolor
+0.5 0.65 MovePcnt
+25 UpdateFont
+(PADBERRY) Center
+show
+
+0.5 0.43 MovePcnt
+15 UpdateFont
+(CHILDRENS) Center
+show
+
+0.5 0.33 MovePcnt
+(ACCESSORIES & GIFTS) Center
+show
